@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TEEN SAVER BD</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>TEEN SAVER BD</h1>
+    <div id="question1">
+      <h2>আপনি কি বেকারত্বের মানসিক চ্যালেঞ্জ মোকাবেলা করার জন্য পেশাদারদের সাহায্য বা কাউন্সেলিং চেয়েছেন কখনো ?
+    </h2>
+      <input type="radio" name="q1" value="10"> না, আমি এটা প্রয়োজনীয় মনে করি না<br>
+      <input type="radio" name="q1" value="5"> হ্যাঁ, আমি পেশাদার সাহায্য চেয়েছিd<br>
+      <input type="radio" name="q1" value="2">  না, কিন্তু আমি এটা বিবেচনা করছি<br>
+      <button onclick="showQuestion2()">Next</button>
+    </div>
+    <div id="question2" style="display: none;">
+      <h2>আপনি বর্তমানে আপনার সামগ্রিক মানসিক সুস্থতাকে কীভাবে মূল্যায়ন করবেন?
+    </h2>
+      <input type="radio" name="q2" value="10"> ভালো<br>
+      <input type="radio" name="q2" value="5"> ভালো না<br>
+      <input type="radio" name="q2" value="2"> মোটামুটি<br>
+      <button onclick="calculateScore()">Submit</button>
+    </div>
+    <div id="result" style="display: none;">
+      <h2>আপনার reuslt hocce = <span id="totalScore"></span></h2>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
