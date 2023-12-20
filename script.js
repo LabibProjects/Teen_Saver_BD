@@ -9,11 +9,11 @@ function showNextQuestion(nextQuestionId) {
 }
 
 function calculateScore() {
-  const totalQuestions = 10; // scors
+  const totalQuestions = 10; // Total number of questions
   let totalScore = 0;
   let allQuestionsAnswered = true;
 
-  // chgeck of questns
+  // Check for unanswered questions
   for (let i = 1; i <= totalQuestions; i++) {
     const selectedOption = document.querySelector(`input[name=q${i}]:checked`);
     if (selectedOption) {
@@ -25,12 +25,27 @@ function calculateScore() {
     }
   }
 
-  // Iall answ
+  // Display different messages based on score range
   if (allQuestionsAnswered) {
-    document.getElementById('result').style.display = 'block';
-    document.getElementById('totalScore').textContent = totalScore;
+    let resultMessage = '';
+    if (totalScore < 40) {
+      resultMessage = 'আপনার মানসিক স্বাস্থ ভালো না 😔';
+    } else if (totalScore >= 40 && totalScore < 80) {
+      resultMessage = 'আপনার মানসিক স্বাস্থ মোটামুটি 😊';
+    } else {
+      resultMessage = 'আপনার মানসিক স্বাস্থ ভালো 😍';
+    }
+
+    if (totalScore >= 40) {
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('totalScore').textContent = totalScore;
+    }
+    
+    alert(resultMessage);
   }
 }
+
+// Rest of your existing code remains unchanged.
 
 const questions = [
   "গত সপ্তাহে আপনি আপনার তাণ্ডব্য স্তরটি কতটুকু রেট করতে চান, 1 থেকে 10 স্কেলে?",
@@ -57,7 +72,14 @@ questions.forEach((question, index) => {
     <input type="radio" name="q${questionNumber}" value="10"> হাঁ <br>
     <input type="radio" name="q${questionNumber}" value="5"> হতে পারে<br>
     <input type="radio" name="q${questionNumber}" value="0"> না<br>
-    ${questionNumber !== questions.length ? `<button type="button" onclick="showNextQuestion('question${questionNumber + 1}')">পরবর্তী</button>` : `<button type="button" onclick="calculateScore()">সাবমিট করুন </button>`}
+    ${
+      questionNumber !== 1
+        ? `<button type="button" onclick="showPreviousQuestion('question${questionNumber - 1}')">পূর্ববর্তী</button>`
+        : ''
+    }
+    ${questionNumber !== questions.length
+      ? `<button type="button" onclick="showNextQuestion('question${questionNumber + 1}')">পরবর্তী</button>`
+      : `<button type="button" onclick="calculateScore()">সাবমিট করুন</button>`}
   `;
 
   if (questionNumber !== 1) {
@@ -66,3 +88,13 @@ questions.forEach((question, index) => {
 
   form.appendChild(div);
 });
+
+function showPreviousQuestion(prevQuestionId) {
+  const currentQuestion = document.getElementById(prevQuestionId).nextElementSibling;
+  const prevQuestion = document.getElementById(prevQuestionId);
+
+  if (currentQuestion && prevQuestion) {
+    currentQuestion.style.display = 'none';
+    prevQuestion.style.display = 'block';
+  }
+}
